@@ -10,11 +10,14 @@ arch := if `uname -m` == "x86_64" {
     }
 clang_flags :="-g -O2 -mcpu=v2" +" " + arch +" " + "-Wunused-command-line-argument -target bpf"
 ebpf:
+    mkdir -p target
     clang {{ clang_flags }} -I./ebpf/ \
         -c ./ebpf/hello.ebpf.c  \
         -o ./target/hello.o 
 
 build:
+    mkdir -p target
+    go mod tidy
     go build -o target/hello ./cmd/main.go
 run: build
     sudo ./target/hello
