@@ -31,8 +31,8 @@ func main() {
 	if err := rlimit.RemoveMemlock(); err != nil {
 		log.Fatal("Failed to remove memlock:", err)
 	}
-	_ = os.RemoveAll("/sys/fs/bpf/sarmor")
-	bpfPath := "./target/swarmor.o"
+	_ = os.RemoveAll("/sys/fs/bpf/hello")
+	bpfPath := "./target/hello.o"
 
 	bpfSpec, err := ebpf.LoadCollectionSpec(bpfPath)
 	if err != nil {

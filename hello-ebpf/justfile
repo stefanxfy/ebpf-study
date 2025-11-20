@@ -11,10 +11,10 @@ arch := if `uname -m` == "x86_64" {
 clang_flags :="-g -O2 -mcpu=v2" +" " + arch +" " + "-Wunused-command-line-argument -target bpf"
 ebpf:
     clang {{ clang_flags }} -I./ebpf/ \
-        -c ./ebpf/swarmor.ebpf.c  \
-        -o ./target/swarmor.o 
+        -c ./ebpf/hello.ebpf.c  \
+        -o ./target/hello.o 
 
 build:
-    go build -o target/swarmor ./cmd/main.go
+    go build -o target/hello ./cmd/main.go
 run: build
-    sudo ./target/swarmor
+    sudo ./target/hello
